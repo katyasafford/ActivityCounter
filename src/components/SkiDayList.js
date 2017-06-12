@@ -2,6 +2,7 @@ import Terrain from 'react-icons/lib/md/terrain';
 import SnowFlake from 'react-icons/lib/ti/weather-snow';
 import Calendar from 'react-icons/lib/fa/calendar';
 import { SkiDayRow } from './SkiDayRow';
+import { PropTypes } from 'react';
 
 export const SkiDayList = ({days}) => (
   <table>
@@ -17,11 +18,17 @@ export const SkiDayList = ({days}) => (
       {/* for each item in day list we are rendering a new row */}
       {days.map((day, i) =>
         <SkiDayRow key={i}
-                   resort={day.resort}
-                   date={day.date}
-                   powder={day.powder}
-                   backcountry={day.backcountry}/>
+                  //  resort={day.resort}
+                  //  date={day.date}
+                  //  powder={day.powder}
+                  //  backcountry={day.backcountry}
+        // commented code is equal to next line:
+        {...day}/>
       )}
     </tbody>
   </table>
 );
+
+SkiDayList.propsTypes = {
+  days: PropTypes.array
+};
