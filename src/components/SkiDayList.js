@@ -29,6 +29,21 @@ export const SkiDayList = ({days}) => (
   </table>
 );
 
+// SkiDayList.propsTypes = {
+//   days: PropTypes.array
+// };
+
+//remove this and just uncomment PropTypes
 SkiDayList.propsTypes = {
-  days: PropTypes.array
+  days: function(props) {
+    if (!Array.isArray(props.days)) {
+      return new Error ('SkiDayList should be an array');
+    }
+    else if (!props.days.length) {
+      return new Error('SkiDayList must have at least one record');
+    }
+    else {
+      return null;
+    }
+  }
 };

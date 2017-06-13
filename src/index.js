@@ -1,33 +1,19 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { SkiDayList } from './components/SkiDayList';
+import { App } from './components/App';
+import { Whoops404 } from './components/Whoops404';
+import { Router, Route, hashHistory } from 'react-router';
 
 // sometime errors pop up saying 'react isnt defined',
 // adding this deals with it
 window.React = React;
 
 render(
-	<SkiDayList days = {
-    [
-      {
-        resort: 'Squaw Valley',
-        date: new Date('1/2/2016'),
-        powder: true,
-        backcountry: false
-      },
-      {
-        resort: 'Kirkwood',
-        date: new Date('3/28/2016'),
-        powder: false,
-        backcountry: false
-      },
-      {
-        resort: 'Mt. Tallac',
-        date: new Date('4/2/2016'),
-        powder: false,
-        backcountry: true
-      }
-    ]
-  }/>,
+	<Router history={hashHistory}>
+		<Route path='/' component={App} />
+		{/* if anyone goes to a page other then home,
+		//they'll see Whoops404 component */}
+		<Route path='*' component={Whoops404} />
+	</Router>,
 	document.getElementById('react-container')
 )
