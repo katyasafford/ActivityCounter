@@ -13,24 +13,22 @@ export class App extends Component {
       allSkiDays: [
         {
           resort: 'Squaw Valley',
-          date: new Date('1/2/2016'),
+          date: '2016-01-02',
           powder: true,
           backcountry: false
-        },
-        {
-          resort: 'Kirkwood',
-          date: new Date('3/28/2016'),
-          powder: false,
-          backcountry: false
-        },
-        {
-          resort: 'Mt. Tallac',
-          date: new Date('4/2/2016'),
-          powder: false,
-          backcountry: true
         }
       ]
     }
+    this.addDay = this.addDay.bind(this);
+  }
+
+  addDay(newDay) {
+    this.setState({
+      allSkiDays: [
+        ...this.state.allSkiDays,
+        newDay
+      ]
+    })
   }
 
  //re-write this function using ES6 and maybe in a better way
@@ -56,8 +54,10 @@ export class App extends Component {
                          backcountry={this.countDays('backcountry')}
             /> :
           (this.props.location.pathname === '/add-day') ?
-            <AddDayForm /> :
-            <SkiDayList days={this.state.allSkiDays} />
+            <AddDayForm onNewDay={this.addDay} /> :
+            <SkiDayList days={this.state.allSkiDays}
+                        filter={this.props.params.filter}
+            />
         }
       </div>
     )
